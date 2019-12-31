@@ -1,3 +1,16 @@
 <h1 class="mt-4">Dashboard</h1>
 <p class="lead mb-3">Welcome <%= name %></p>
+<div class = "form-group">
+    <label for="FavSaying"> My Favourite Saying</label>
+    <input type="text" id="FavSaying" class="form-control" aria-describedby="passwordHelpBlock" method = "POST">
+    <small id="FavSayingInst" class="form-text text-muted">
+        Enter a phrase to have it stored for the next time you login.
+   </small>
+    <button type="submit" class="btn btn-dark mt-2">Submit</button>
+</div>
+<label class = "mt-2" for="inputPassword5">My Favourite Saying from the DataBase</label>
+<input type="text" id="returnMongo" class="form-control" aria-describedby="passwordHelpBlock" readonly>
+<small id="passwordHelpBlock2" class="form-text text-muted">
+    Previous Phrase
+   </small>
 <a href="/users/logout" class="btn btn-secondary">Logout</a>

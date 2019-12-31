@@ -100,6 +100,14 @@ router.get('/logout', (req, res) => {
   res.redirect('/users/login');
 });
 
+//Handle the fav saying
+router.post('/dashboard', (req,res) => {
+  const FavSaying = req.body;
+  User.findOne({ name: name }).then(user => {
+    if (user) {
+      User.findOneAndUpdate({name, FavSaying})
+    }
+  })
+});
 
-        
 module.exports = router;
