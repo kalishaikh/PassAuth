@@ -24,6 +24,7 @@ router.post('/register', (req,res) => {
     ***Send will display text plainly with no CSS
     */
     const { name, email, password, password2} = req.body;
+    console.log(req.body);
     let errors = [];
 
     //Check for required fields
@@ -63,7 +64,8 @@ router.post('/register', (req,res) => {
                 const newUser = new User({
                   name,
                   email,
-                  password
+                  password,
+                  favSaying : '',
                 });
                 //Hash Password
                 bcrypt.genSalt(10, (err,salt) => bcrypt.hash(newUser.password,salt, (err,hash) => {
@@ -102,12 +104,11 @@ router.get('/logout', (req, res) => {
 
 //Handle the fav saying
 router.post('/dashboard', (req,res) => {
-  const FavSaying = req.body;
-  User.findOne({ name: name }).then(user => {
-    if (user) {
-      User.findOneAndUpdate({name, FavSaying})
-    }
-  })
+  const favSaying = req.body;
+  console.log(req.body);
+  User.findOneAndUpdate({email:'tester2@gmail.com', favSaying:favSaying});
+  req.flash('store_msg', 'Your phrase has been stored!');
+  res.redirect('/views/dashboard');
 });
 
 module.exports = router;
