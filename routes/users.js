@@ -104,11 +104,15 @@ router.get('/logout', (req, res) => {
 
 //Handle the fav saying
 router.post('/dashboard', (req,res) => {
-  const favSaying = req.body;
-  console.log(req.body);
-  User.findOneAndUpdate({email:'tester2@gmail.com', favSaying:favSaying});
-  req.flash('store_msg', 'Your phrase has been stored!');
-  res.redirect('/views/dashboard');
+  const {favSaying} = req.body;
+  console.log(favSaying);
+  const email = 'kaasimshaikh2026@gmail.com';
+  User.findOneAndUpdate({email:email, favSaying:favSaying}).then(user =>{
+    req.flash('store_msg', 'Your phrase has been stored!');
+    res.redirect('/views/dashboard');
+    console.log("Updated");
+  })
+    .catch(err => console.log(err));
 });
 
 module.exports = router;
