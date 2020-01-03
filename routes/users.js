@@ -105,14 +105,32 @@ router.get('/logout', (req, res) => {
 //Handle the fav saying
 router.post('/dashboard', (req,res) => {
   const {favSaying} = req.body;
-  console.log(favSaying);
-  const email = 'kaasimshaikh2026@gmail.com';
-  User.findOneAndUpdate({email:email, favSaying:favSaying}).then(user =>{
+  console.log(req.body);
+  const email = req.user.email;
+  console.log("email is: " + email);
+  User.findOneAndUpdate({email:email}, {favSaying:favSaying}).then(user =>{
     req.flash('store_msg', 'Your phrase has been stored!');
     res.redirect('/views/dashboard');
+    console.log(user.email);
     console.log("Updated");
   })
     .catch(err => console.log(err));
 });
+
+//This sends null figure out why
+router.post('/arrayAdd', (req,res) => {
+  console.log(req.body);
+  const {arrayMe} = req.body;
+  const email = req.user.email;
+  console.log(email);
+  User.findOneAndUpdate({email:email}, {"$push" : {tasks:arrayMe}}).then(user=>{
+    console.log(email);
+    req.flash('store_msg', 'Array has been filled!');
+    res.redirect('/views/dashboard');
+  })
+  .catch(err => console.log(err));
+});
+
+
 
 module.exports = router;

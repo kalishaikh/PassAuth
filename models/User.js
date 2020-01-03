@@ -21,7 +21,13 @@ const UserSchema = new mongoose.Schema({
     favSaying: {
         type: String,
         required: false,
-    }
+    },
+
+    tasks: [{
+        type:String,
+        length: 100,
+        required: false,
+    }]
 });
 
 const User = mongoose.model('User',UserSchema);

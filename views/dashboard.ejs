@@ -16,7 +16,7 @@
         <small id="FavSayingInst" class="form-text text-muted">
             Enter a phrase to have it stored for the next time you login.
         </small>
-    <button type="submit" class="btn btn-dark mt-2">Submit</button>
+    <button type="submit" id = "submitB" class="btn btn-dark mt-2">Submit</button>
 </div>
 </form>
 <label class = "mt-2" for="inputPassword5">My Favourite Saying from the DataBase</label>
@@ -24,4 +24,18 @@
 <small id="passwordHelpBlock2" class="form-text text-muted">
     Your Previous Favourite saying
    </small>
+<div>
+    <form action = "/users/arrayAdd" method = "POST">
+        <div class = "form-group">
+            <input 
+            type="text" 
+            id="arrayMe"
+            name="arrayMe" 
+            class="form-control"
+            placeholder = "Enter something here to be stored in an array"
+            />
+            </div>
+            <button type="submit" class="btn btn-info mt-2">Array Submit</button>
+    </form>
+</div>
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
