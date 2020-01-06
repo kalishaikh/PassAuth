@@ -1,0 +1,69 @@
+
+.btn.btn-danger.btn-sm{
+    margin-right: 10px;
+    border-radius: 4px;
+    text-align: center;
+    float:right;
+}
+
+.btn.btn-success.btn-sm{
+    margin-right: 10px;
+    border-radius: 4px;
+    text-align: center;
+    float:right;
+}
+
+#mainHeading{
+    padding-top: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+#welcomeMsg{
+    text-align: center;
+}
+
+.table{
+    background-color:#F8F8F8;
+    border-radius: 8px;
+}
+
+li {
+    margin-right: 70px;
+    border-radius: 4px;
+    width: 540px;
+}
+
+#nTask {
+    text-align: center;
+}
+
+#arrayMe {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+
+
+ul{
+    height:400px;overflow:hidden; overflow-y:scroll;
+}
+
+
+
+
+#logout{
+    float: right;
+    border-radius: 4px;
+}
+
+.alert{
+    top:30%;
+    width: 20%;
+    border-radius: 4px;
+    text-align: center;
+    position: fixed;
+    right: 30px;
+    top:30px;
+}

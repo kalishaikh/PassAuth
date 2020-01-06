@@ -1,41 +1,44 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= name %></p>
+<h1 class="mt-4" id ="mainHeading">Task Scheduler</h1>
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+crossorigin="anonymous"></script>
+    <link rel = "stylesheet" href = "test.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+
+<p class="lead mb-3" id = "welcomeMsg">Welcome <%= name %></p>
+
+<a href="/users/logout" class="btn btn-info" id = "logout">Logout</a>
 <%- include('./partial/messages.ejs'); %>
-<div>
-    <label> My Favourite Saying</label>
-    <form action ="/users/dashboard" method ="POST">
-        <div class = "form-group">
-        <input 
+
+<div class = "container" id = "nTask">
+<form action = "/users/arrayAdd" method = "POST">
+    <input autocomplete="off"
         type="text" 
-        id="favSaying"
-        name="favSaying" 
+        id="arrayMe"
+        name="arrayMe" 
         class="form-control"
-        placeholder = "Enter phrase here"
-        />
-        </div>
-        <small id="FavSayingInst" class="form-text text-muted">
-            Enter a phrase to have it stored for the next time you login.
-        </small>
-    <button type="submit" id = "submitB" class="btn btn-dark mt-2">Submit</button>
-</div>
+        placeholder = "Add a task"
+    >
 </form>
-<label class = "mt-2" for="inputPassword5">My Favourite Saying from the DataBase</label>
-<input type="text" id="returnMongo" class="form-control" aria-describedby="passwordHelpBlock" readonly value= "<%= favSaying %>" >
-<small id="passwordHelpBlock2" class="form-text text-muted">
-    Your Previous Favourite saying
-   </small>
-<div>
-    <form action = "/users/arrayAdd" method = "POST">
-        <div class = "form-group">
-            <input 
-            type="text" 
-            id="arrayMe"
-            name="arrayMe" 
-            class="form-control"
-            placeholder = "Enter something here to be stored in an array"
-            />
-            </div>
-            <button type="submit" class="btn btn-info mt-2">Array Submit</button>
-    </form>
 </div>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<div class = "container" id = "currTask">
+        <div class = "form-group">
+         <ul class = "list-group" id ="currTaskUl">
+                <% for(var i=0; i<tasks.length; i++) {%>
+            <form action = "/users/dashboard" method = "POST" class = "taskForm">
+                <div class = "input-group mb-3">
+                <input type = "text" class = "form-control" name = "testerinput" id = "testIn" value = "<%= tasks[i] %>">
+                    <button class = "btn btn-success btn-sm" type = "submit"><i class="fa fa-check fa-sm"></i></button>
+                    <button class = "btn btn-danger btn-sm" type = "submit"><i class="fa fa-close fa-sm"></i></button>  
+            </div>
+        </form>
+                <% } %> %> 
+         </ul>
+        </div>
+    </div>      
+    <form action = "/users/dashboard" method = "POST" id="testform">
+        <input type="text" name = "t">
+        <button type = "submit">tester</button>
+        </form>
+    <script src = "jstest.js"></script>

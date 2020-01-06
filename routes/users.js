@@ -11,10 +11,12 @@ require('../config/passport')(passport);
 //Model 
 const User = require('../models/User');
 //Login Page
-router.get('/login', (req,res) => res.render('Login')); //render vs send. If you render it uses html/css/JS
+router.get('/login', (req,res) => res.render('login')); //render vs send. If you render it uses html/css/JS
 
 //Register Page
-router.get('/register', (req,res) => res.render('Register'));
+router.get('/register', (req,res) => res.render('register'));
+
+router.get('/dashboard', (req,res) => res.render('dashboard'));
 
 //Register Handle
 router.post('/register', (req,res) => {
@@ -24,7 +26,6 @@ router.post('/register', (req,res) => {
     ***Send will display text plainly with no CSS
     */
     const { name, email, password, password2} = req.body;
-    console.log(req.body);
     let errors = [];
 
     //Check for required fields
@@ -104,31 +105,39 @@ router.get('/logout', (req, res) => {
 
 //Handle the fav saying
 router.post('/dashboard', (req,res) => {
-  const {favSaying} = req.body;
-  console.log(req.body);
+  const favSaying = req.body.testerinput;
   const email = req.user.email;
   console.log("email is: " + email);
-  User.findOneAndUpdate({email:email}, {favSaying:favSaying}).then(user =>{
-    req.flash('store_msg', 'Your phrase has been stored!');
+  User.findOneAndUpdate({email:email}, {"$pull": {tasks:favSaying}}).then(user =>{
+    console.log(favSaying);
+    req.flash('store_msg', 'Task Completed!');
     res.redirect('/views/dashboard');
-    console.log(user.email);
-    console.log("Updated");
   })
     .catch(err => console.log(err));
 });
 
 //This sends null figure out why
 router.post('/arrayAdd', (req,res) => {
-  console.log(req.body);
   const {arrayMe} = req.body;
   const email = req.user.email;
-  console.log(email);
+  if(arrayMe == ''){
+    req.flash('error_msg', 'Task Cannot be blank');
+    res.redirect('/views/dashboard');
+  }
+ else{
+
   User.findOneAndUpdate({email:email}, {"$push" : {tasks:arrayMe}}).then(user=>{
-    console.log(email);
-    req.flash('store_msg', 'Array has been filled!');
+    req.flash('store_msg', 'Task Added!');
+    console.log(arrayMe);
     res.redirect('/views/dashboard');
   })
   .catch(err => console.log(err));
+}
+});
+
+router.route('/test').post(function (req, res){
+  res.send(req.user.tasks);
+  console.log(req.user.t);
 });
 
 

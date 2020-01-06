@@ -2,14 +2,20 @@ const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/auth');
 
+
+
 //Welcome Page
 router.get('/', (req,res) => res.render('Welcome'));
 
 //Dasboard 
 router.get('/views/dashboard', ensureAuthenticated, (req,res) => res.render('dashboard', 
 {
+    
     name: req.user.name,
-    favSaying: req.user.favSaying
+    favSaying: req.user.favSaying,
+    tasks:req.user.tasks,
+    length:req.user.tasks.length,
 }));
+
 
 module.exports = router;

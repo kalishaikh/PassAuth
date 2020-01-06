@@ -15,10 +15,15 @@ require('./config/passport')(passport);
 app.use(expressLayouts);
 app.set('view engine','ejs');
 
+//
+app.use('/views',express.static('styles'));
+
 //DB Config
 const db = require('./config/keys').MongoURI;
 
 //Connect to Mongo
+mongoose.set('useFindAndModify', false);
+mongoose.set('useUnifiedTopology', true);
 mongoose.connect(db, { useNewUrlParser: true })
 .then(() => console.log('MongoDB connected...'))
 .catch(err => console.log(err));
@@ -52,6 +57,7 @@ app.use((req,res,next) => {
 //Routes
 app.use('/', require('./routes/index2')); //The first comment is where the webpage routes to, the second is the js file
 app.use('/users', require('./routes/users'));
+
 
 const PORT = process.env.PORT || 5000; 
 
