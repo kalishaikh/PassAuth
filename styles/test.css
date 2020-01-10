@@ -1,16 +1,43 @@
+html{
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+
+
+body {
+    background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+p {
+    color: white;
+}
+
+h1{
+    color: white;
+}
 
 .btn.btn-danger.btn-sm{
     margin-right: 10px;
     border-radius: 4px;
     text-align: center;
     float:right;
+    width: 50px;
 }
+
+
 
 .btn.btn-success.btn-sm{
     margin-right: 10px;
+    margin-left: 10px;
     border-radius: 4px;
     text-align: center;
     float:right;
+    width: 50px;
 }
 
 #mainHeading{
@@ -18,6 +45,7 @@
     text-align: center;
     justify-content: center;
 }
+
 
 #welcomeMsg{
     text-align: center;
@@ -28,34 +56,28 @@
     border-radius: 8px;
 }
 
-li {
-    margin-right: 70px;
-    border-radius: 4px;
-    width: 540px;
-}
-
 #nTask {
     text-align: center;
+    margin-left: 50px;
 }
 
 #arrayMe {
-    width: 50%;
+    width: 60%;
     display: inline-block;
     margin-bottom: 30px;
+    margin-right: 70px;
+    margin-top: 25px;
 }
 
-
-
-ul{
-    height:400px;overflow:hidden; overflow-y:scroll;
+.taskForm{
+    overflow:auto;
 }
-
-
-
 
 #logout{
-    float: right;
+    display: inline-flex;
     border-radius: 4px;
+    margin-bottom: 10px;
+    
 }
 
 .alert{
@@ -66,4 +88,14 @@ ul{
     position: fixed;
     right: 30px;
     top:30px;
+}
+
+#currTask{
+    border-radius: 5px;
+    height: 300px;
+    overflow-y:auto;
+}
+
+input[type = "text"]{
+    background-color: gainsboro;
 }

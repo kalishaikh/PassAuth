@@ -116,30 +116,41 @@ router.post('/dashboard', (req,res) => {
     .catch(err => console.log(err));
 });
 
-//This sends null figure out why
-router.post('/arrayAdd', (req,res) => {
-  const {arrayMe} = req.body;
+router.route('/deleteTask').post(function (req, res){ 
+  const favSaying = req.body.deletedTask;
   const email = req.user.email;
-  if(arrayMe == ''){
-    req.flash('error_msg', 'Task Cannot be blank');
-    res.redirect('/views/dashboard');
-  }
- else{
-
-  User.findOneAndUpdate({email:email}, {"$push" : {tasks:arrayMe}}).then(user=>{
-    req.flash('store_msg', 'Task Added!');
-    console.log(arrayMe);
-    res.redirect('/views/dashboard');
+  User.findOneAndUpdate({email:email}, {"$pull" : {tasks:favSaying}}, {returnOriginal: false}).then(user =>{
+    console.log("success");
+    res.send(req.user.tasks);
   })
-  .catch(err => console.log(err));
-}
+  .catch(err => console.log(err)); 
+  console.log("Tasks are" + req.user.tasks);
 });
 
-router.route('/test').post(function (req, res){
+router.route('/addedTask').post(function (req, res){
+  const newTask = req.body.addedTask;
+  const email = req.user.email;
+
+  User.findOneAndUpdate({email:email}, {"$push" : {tasks:newTask}}).then (user => {
+    console.log("Task Added");
+  })
+  .catch (err => console.log(err));
   res.send(req.user.tasks);
-  console.log(req.user.t);
 });
 
+router.route('/editTask').post(function (req,res){
+  const newEntry = req.body.update.newEntry;
+  const oldEntry = req.body.update.original_val;
+  const email = req.user.email;
+  console.log("old Entry is " + oldEntry);
+  console.log("new Entry is " + newEntry);
+
+  User.findOneAndUpdate({email:email, tasks:oldEntry},{"$set" : {"tasks.$" : newEntry}}, {returnNewDocument : true}).then(
+    user => {
+      console.log("task updated");
+    })
+    .catch(err => console.log(err));  
+});
 
 
 module.exports = router;
